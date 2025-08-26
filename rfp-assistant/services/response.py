@@ -13,7 +13,7 @@ from services.knowledge import knowledge_service
 from utils.prompt_loader import prompt_loader
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
-
+from datetime import datetime
 # Add parent directory to path to import from semantic_similarity
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 from semantic_similarity import get_client, GeminiSettings

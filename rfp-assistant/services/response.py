@@ -421,19 +421,20 @@ Your response should be professional, detailed, and directly address the questio
             # Create response object with full transparency
             logger.info("Creating chat response object with full transparency data")
             response_obj = {
-                "query": query,
-                "response_text": response_text,
-                "system_prompt": system_prompt,
-                "user_prompt": user_prompt,
-                "knowledge_context": knowledge_context,
-                "sources":None
-                # "sources": [{
-                #     "text": k["text"],
-                #     "metadata": k.get("metadata", {}),
-                #     "source": k.get("source", "Unknown"),
-                #     "score": k.get("score", 0.0)
-                # } for k in knowledge]
+            "query": query,
+            "response_text": response_text,
+            "system_prompt": system_prompt,
+            "user_prompt": user_prompt,
+            "knowledge_context": knowledge_context,
+            "sources": [{
+            "text": k["text"],
+            "metadata": k.get("metadata", {}),
+            "source": k.get("source", "Unknown"),
+            "score": k.get("score", 0.0)
+            } for k in knowledge]
             }
+            
+            
             
             # Cache response
             logger.info(f"Caching chat response for query: '{truncated_query}'")

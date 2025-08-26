@@ -335,7 +335,7 @@ class KnowledgeEmbedder:
             if os.path.exists(f"{self.vector_store_path}/index.faiss"):
                 logger.info(f"No new chunks to embed, loading existing vector store from {self.vector_store_path}")
                 try:
-                    vector_store = FAISS.load_local(self.vector_store_path, self.embeddings)
+                    vector_store = FAISS.load_local(self.vector_store_path, self.embeddings, allow_dangerous_deserialization=True)
                     return vector_store
                 except Exception as e:
                     logger.error(f"Error loading existing vector store: {str(e)}")
@@ -347,7 +347,7 @@ class KnowledgeEmbedder:
         if os.path.exists(f"{self.vector_store_path}/index.faiss"):
             try:
                 logger.info(f"Loading existing vector store from {self.vector_store_path}")
-                existing_vector_store = FAISS.load_local(self.vector_store_path, self.embeddings)
+                existing_vector_store = FAISS.load_local(self.vector_store_path, self.embeddings, allow_dangerous_deserialization=True)
             except Exception as e:
                 logger.error(f"Error loading existing vector store: {str(e)}")
                 # Continue with new vector store
@@ -460,7 +460,7 @@ class KnowledgeEmbedder:
         # Check if vector store already exists
         if os.path.exists(f"{self.vector_store_path}/index.faiss"):
             logger.info(f"Vector store already exists at {self.vector_store_path}, loading existing store")
-            vector_store = FAISS.load_local(self.vector_store_path, self.embeddings)
+            vector_store = FAISS.load_local(self.vector_store_path, self.embeddings, allow_dangerous_deserialization=True)
             return self.vector_store_path
         
         # Create embeddings and vector store
@@ -477,8 +477,11 @@ class KnowledgeEmbedder:
 def main():
     """Main function to run the embedder."""
     # Get source and output directories from command line arguments or use defaults
-    source_dir = sys.argv[1] if len(sys.argv) > 1 else "/Users/u1112870/Library/CloudStorage/OneDrive-IQVIA/Ananth/Personal/Arokia_sir/Responses"
-    output_dir = sys.argv[2] if len(sys.argv) > 2 else "/Users/u1112870/Library/CloudStorage/OneDrive-IQVIA/Ananth/Personal/Arokia_sir/rfp-data"
+    #source_dir = sys.argv[1] if len(sys.argv) > 1 else "/Users/u1112870/Library/CloudStorage/OneDrive-IQVIA/Ananth/Personal/Arokia_sir/Responses"
+    #output_dir = sys.argv[2] if len(sys.argv) > 2 else "/Users/u1112870/Library/CloudStorage/OneDrive-IQVIA/Ananth/Personal/Arokia_sir/rfp-data"
+    source_dir = sys.argv[1]
+    output_dir  = sys.argv[2]
+    
     
     # Log the paths to ensure they're correct
     logger.info(f"Using source directory: {source_dir}")
